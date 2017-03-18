@@ -12,7 +12,7 @@ namespace Forecast.Config
                 .Include("~/scripts/angular.js")
                 .Include("~/scripts/angular-sanitize.js")
                 .Include("~/scripts/bootstrap.js")
-                .Include("~/scripts/jquery-1.9.1.js")
+                .Include("~/scripts/jquery-3.1.1.js")
                 );
 #else
             BundleTable.EnableOptimizations = true;
@@ -20,7 +20,7 @@ namespace Forecast.Config
                 .Include("~/scripts/angular.min.js")
                 .Include("~/scripts/angular-sanitize.min.js")
                 .Include("~/scripts/bootstrap.min.js")
-                .Include("~/scripts/jquery-1.9.1.min.js")
+                .Include("~/scripts/jquery-3.1.1.min.js")
                 //.Include("~/scripts/lodash.min.js")
             );
 #endif

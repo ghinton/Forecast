@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Forecast.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class TestWeatherService
     {
         [TestMethod]
         public void GetWeatherWithNoCity()
         {
-
+            var fc = new Controllers.ForecastController();
+            IHttpActionResult r = fc.GetForecast(string.Empty);
         }
 
         [TestMethod]
