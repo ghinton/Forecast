@@ -1,0 +1,93 @@
+﻿@using System.Web.Optimization;
+
+<!DOCTYPE html>
+<html lang="en" ng-app="forecast">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather</title>
+    <!-- Import Google API -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcJ1gSGM_fum5rjo8wBmKUShinG-1CW88"></script>
+    @Styles.Render("~/css/bundled")
+</head>
+<body>
+    <div class="container" ng-controller="forecastCtrl as vm">
+        <div id="intro" class="jumbotron"><H1>Angular JS - Weather Forecast v1.0</H1></div>
+        <div class="row">
+            <div class="col-md-11 form-group has-feedback">
+                <div class="input-group">
+                    <!--<select ng-model="selectedCountry" name="ddCity" ng-options="country as country.name for country in isoCountryList track by country.code">
+                    </select>-->
+                    <span class="input-group-addon" style="font-weight:bold">Country</span>
+                    <input type="text" class="form-control" id="txtCountry" aria-describedby="inputGrouptxtCountryStatus" list="countryList" ng-model="countryOptions.country" placeholder="Enter a country" />
+                    <datalist id="countryList">
+                        <option data-ng-repeat="country in vm.isoCountryList" value="{{country.code}}">{{country.name}}</option>
+                    </datalist>
+                    <span ng-show="vm.selectedCountryCodeSet()" class="glyphicon glyphicon-ok form-control-feedback" style="color:green" aria-hidden="true"></span>
+                    <span ng-show="!vm.selectedCountryCodeSet()" class="glyphicon glyphicon-remove form-control-feedback" style="color:red" aria-hidden="true"></span>
+                    <span id="inputGrouptxtCountryStatus" class="sr-only">(success)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11 form-group has-feedback">
+                <div class="input-group">
+                    <span class="input-group-addon" style="font-weight:bold">City</span>
+                    <input ng-disabled="!vm.selectedCountryCodeSet()" type="text" class="form-control" id="txtCity" aria-describedby="inputGrouptxtCityStatus" ng-autocomplete="countryResult" options="countryOptions" details="countryDetails">
+                    <span ng-show="vm.selectedCountryCodeSet()" class="glyphicon glyphicon-ok form-control-feedback" style="color:green" aria-hidden="true"></span>
+                    <span ng-show="!vm.selectedCountryCodeSet()" class="glyphicon glyphicon-remove form-control-feedback" style="color:red" aria-hidden="true"></span>
+                    <span id="inputGrouptxtCityStatus" class="sr-only">(success)</span>
+                </div>
+            </div>
+            <div class="col-md-1 nopad"><input type="button" class="btn btn-primary" value="Go" title="Get Forecast" ng-click="vm.getForecast()" /></div>
+        </div>
+        <div class="row" ng-show="vm.cityForecast != []">
+            <div class="col-md-3 text-right"><label>City</label></div>
+            <div class="col-md-9">{{vm.cityForecast.city.name}},{{vm.cityForecast.city.country}}</div>
+        </div>
+        <div class="row" ng-show="vm.cityForecast != []">
+            <div class="col-md-3 text-right"><label>Latitude / Longtitude</label></div>
+            <div class="col-md-9">{{vm.cityForecast.city.latitude}}, {{vm.cityForecast.city.longtitude}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2" ng-repeat="day in vm.cityForecast.days"><!-- each day has a date and timeslices property -->
+                <div class="row">
+                    <div class="col-md-12 text-center"><label>{{day.date}}</label></div>
+                </div>
+                <div ng-repeat="timeslice in day.timeslices"><!-- Time slice -->
+                    <div class="row" style="border-top:solid 1px #c9c9c9;background-color:lightsteelblue;border-radius: 10px;">
+                        <div class="col-sm-4"><label>Time</label></div>
+                        <div class="col-sm-8">{{timeslice.period}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center"><img class="img-responsive" src="{{timeslice.icon}}" alt="{{timeslice.description}}, cloud cover {{timeslice.cloudCoverPercentage}}" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Min</div>
+                        <div class="col-sm-8" ng-bind-html="timeslice.minTemperature"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Max</div>
+                        <div class="col-sm-8" ng-bind-html="timeslice.maxTemperature"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Wind</div>
+                        <div class="col-sm-8" ng-bind-html="timeslice.windSummary"></div>                            
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Humidity</div>
+                        <div class="col-sm-8">{{timeslice.humidity}}</div>
+                    </div>
+                </div>
+            </div><!-- End forecast days repeater -->
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+    <!-- General JS and angular -->
+    @Scripts.Render("~/js/bundled")
+    @Scripts.Render("~/app/bundled")
+</body>
+</html>

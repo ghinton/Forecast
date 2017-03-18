@@ -1,0 +1,9 @@
+﻿.jumbotron#intro {padding-top:10px;padding-bottom:10px;padding-left:10px;}
+
+.verticalCentreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nopad {padding:0px;}
