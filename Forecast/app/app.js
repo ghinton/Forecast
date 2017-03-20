@@ -9,6 +9,7 @@
 
         // View Model Controller functions
         vm.isoCountryList = resources.ISOCOUNTRYLIST;
+        vm.countryAndCitySet = countryAndCitySet;
         vm.selectedCountryCodeSet = selectedCountryCodeSet;
         vm.getForecast = getForecast;
 
@@ -24,10 +25,14 @@
         vm.cityForecast = [];
 
         function getForecast() {
-            var selectedCountry = $scope.countryOptions.country;
-            var selectedCity = $scope.countryDetails.name;
+            var selectedCountry = $scope.countryOptions.country.trim();
+            var selectedCity = $scope.countryDetails.name.trim();
             // Now call the .Net webservice via angular to retrieve the 5 day forecast JSON
             weatherService.getWeatherByCity(selectedCity + "," + selectedCountry).then(forecastLoaded, onFailure);
+        }
+
+        function countryAndCitySet() {
+            return selectedCountryCodeSet && txtCity.value !== "";
         }
 
         function selectedCountryCodeSet() {
@@ -49,8 +54,8 @@
             }
         }
 
-        function onFailure(errMsg) {
-            alert("Failure" + errMsg)
+        function onFailure(err) {
+            alert("Failure" + err.data);
         }
 
         /*function buildForecastTable() {

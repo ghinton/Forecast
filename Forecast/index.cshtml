@@ -39,7 +39,7 @@
                     <span id="inputGrouptxtCityStatus" class="sr-only">(success)</span>
                 </div>
             </div>
-            <div class="col-md-1 nopad"><input type="button" class="btn btn-primary" value="Go" title="Get Forecast" ng-click="vm.getForecast()" /></div>
+            <div class="col-md-1 nopad"><input type="button" class="btn btn-primary" value="Go" title="Get Forecast" ng-disabled="!vm.countryAndCitySet()" ng-click="vm.getForecast()" /></div>
         </div>
         <div class="row" ng-show="vm.cityForecast != []">
             <div class="col-md-3 text-right"><label>City</label></div>
