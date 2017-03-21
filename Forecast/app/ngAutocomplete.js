@@ -50,10 +50,10 @@
                              if (scope.options.country) {
                                  opts.componentRestrictions = {
                                      country: scope.options.country
-                                 }
+                                 };
                              }
                          }
-                     }
+                     };
                      initOpts();
                      //console.log(opts);
 
@@ -68,8 +68,8 @@
                                  //              }
                                  scope.ngAutocomplete = element.val();
                              });
-                         })
-                     }
+                         });
+                     };
                      newAutocomplete();
 
                      //watch options provided to directive

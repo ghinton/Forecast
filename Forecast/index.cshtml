@@ -40,16 +40,16 @@
             </div>
             <div class="col-md-1 nopad"><input type="button" class="btn btn-primary" value="Go" title="Get Forecast" ng-disabled="!vm.countryAndCitySet()" ng-click="vm.getForecast()" /></div>
         </div>
-        <div class="row" ng-show="vm.cityForecast != []">
+        <div class="row" ng-show="vm.forecastFetched">
             <div class="col-md-3 text-right"><label>City</label></div>
             <div class="col-md-9">{{vm.cityForecast.city.name}},{{vm.cityForecast.city.country}}</div>
         </div>
-        <div class="row" ng-hide="vm.cityForecast == []">
+        <div class="row" ng-show="vm.forecastFetched">
             <div class="col-md-3 text-right"><label>Latitude / Longtitude</label></div>
             <div class="col-md-9">{{vm.cityForecast.city.latitude}}, {{vm.cityForecast.city.longtitude}}</div>
         </div>
 
-        <div class="row" ng-hide="vm.cityForecast == []">
+        <div class="row" ng-show="vm.forecastFetched">
             <div class="col-md-1"></div>
             <div class="col-md-2" ng-repeat="day in vm.cityForecast.days"><!-- each day has a date and timeslices property -->
                 <div class="row">
@@ -61,22 +61,22 @@
                         <div class="col-sm-8">{{timeslice.period}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 text-center"><img class="img-responsive" src="{{timeslice.icon}}" alt="{{timeslice.description}}, cloud cover {{timeslice.cloudCoverPercentage}}" /></div>
+                        <div class="col-sm-12"><img class="img-responsive center-block" ng-src="{{timeslice.icon}}" alt="{{timeslice.description}}, cloud cover {{timeslice.cloudCoverPercentage}}" title="{{timeslice.description}}, cloud cover {{timeslice.cloudCoverPercentage}}" /></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">Min</div>
+                        <div class="col-sm-4 nopad text-right">Min</div>
                         <div class="col-sm-8" ng-bind-html="timeslice.minTemperature"></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">Max</div>
+                        <div class="col-sm-4 nopad text-right">Max</div>
                         <div class="col-sm-8" ng-bind-html="timeslice.maxTemperature"></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">Wind</div>
+                        <div class="col-sm-4 nopad text-right">Wind</div>
                         <div class="col-sm-8" ng-bind-html="timeslice.windSummary"></div>                            
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">Humidity</div>
+                        <div class="col-sm-4 nopad text-right">Humidity</div>
                         <div class="col-sm-8">{{timeslice.humidity}}</div>
                     </div>
                 </div>

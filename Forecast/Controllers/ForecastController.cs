@@ -61,7 +61,15 @@ namespace Forecast.Controllers
 
                 ForecastManager fm = new ForecastManager();
                 wf = fm.GetForecastByCity(strResponse, cityName);
-                return Request.CreateResponse(HttpStatusCode.OK, wf);
+                if (Request != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, wf);
+                }
+                else
+                {
+                    HttpRequestMessage hrm = new HttpRequestMessage();
+                    return hrm.CreateResponse(HttpStatusCode.OK, wf, GlobalConfiguration.Configuration);
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +79,13 @@ namespace Forecast.Controllers
                 }
 
                 // TO DO - ADD INTERNAL LOGGING TO FILE
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, wf);
+                if(Request != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, wf);
+                }
+                // Unit Testing alternative
+                HttpRequestMessage hrm = new HttpRequestMessage();
+                return hrm.CreateResponse(HttpStatusCode.InternalServerError, wf, GlobalConfiguration.Configuration);
             }
         }
     }

@@ -85,9 +85,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Forecast.Helper\Forecast.Helper.csproj">
+      <Project>{8e1aa265-31a9-4964-b833-1f568823393a}</Project>
+      <Name>Forecast.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forecast.Manager\Forecast.Manager.csproj">
       <Project>{90e79507-1192-4914-94e5-0c6d4f362f4b}</Project>
       <Name>Forecast.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forecast.Models\Forecast.Models.csproj">
+      <Project>{0fbe30c6-0f23-4f9d-a209-ffb276e2fdf1}</Project>
+      <Name>Forecast.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forecast\Forecast.csproj">
       <Project>{81a24381-49aa-496d-9f3f-f8dce50b8342}</Project>
@@ -119,7 +127,7 @@
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>C:\Code\Forecast3\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe C:\Code\Forecast3\Forecast.Tests\bin\Debug\forecast.tests.dll --framework=net-4.5 --work=C:\Code\Forecast3\Forecast.Tests\bin\Debug\TestResults --result=Forecast.Tests.xmlout</PostBuildEvent>
+    <PostBuildEvent>REM C:\Code\Forecast3\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe C:\Code\Forecast3\Forecast.Tests\bin\Debug\forecast.tests.dll --framework=net-4.5 --work=C:\Code\Forecast3\Forecast.Tests\bin\Debug\TestResults --result=Forecast.Tests.xmlout</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

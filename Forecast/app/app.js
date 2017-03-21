@@ -12,6 +12,7 @@
         vm.countryAndCitySet = countryAndCitySet;
         vm.selectedCountryCodeSet = selectedCountryCodeSet;
         vm.getForecast = getForecast;
+        vm.forecastFetched = false;
 
         // Google Autocomplete
         $scope.countryResult = "";
@@ -47,6 +48,7 @@
 
         function forecastLoaded(forecastObj) {
             vm.cityForecast = forecastObj.data;
+            vm.forecastFetched = true;
             // City class plus Days dictionary keyed by date in dd-MMM-yyyy format; each day has a dictionary of 8 ForecastDay3HourSlice objects
             if (!$scope.$$phase) {
                 $scope.$apply();
@@ -62,6 +64,7 @@
             $('#mdlBody').html(result);
             $('#mdlTitle').text("Forecast Retrieval Failure");
             $('#mdlMessages').modal('show');
+            vm.forecastFetched = false;
         }
 
         /*function buildForecastTable() {
