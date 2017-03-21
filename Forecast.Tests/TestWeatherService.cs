@@ -90,7 +90,8 @@ namespace Forecast.Tests
         [OneTimeTearDown]
         public void TearDown()
         {
-
+            fc = null;
+            Console.WriteLine("Tests completed");
         }
 
         // Fetch web service call with pre-supplied city
