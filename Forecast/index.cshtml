@@ -9,6 +9,7 @@
     <!-- Import Google API -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcJ1gSGM_fum5rjo8wBmKUShinG-1CW88"></script>
     @Styles.Render("~/css/bundled")
+    <meta name="description" content="Weather Forecast" />
 </head>
 <body>
     <div class="container" ng-controller="forecastCtrl as vm">
@@ -16,8 +17,6 @@
         <div class="row">
             <div class="col-md-11 form-group has-feedback">
                 <div class="input-group">
-                    <!--<select ng-model="selectedCountry" name="ddCity" ng-options="country as country.name for country in isoCountryList track by country.code">
-                    </select>-->
                     <span class="input-group-addon" style="font-weight:bold">Country</span>
                     <input type="text" class="form-control" id="txtCountry" aria-describedby="inputGrouptxtCountryStatus" list="countryList" ng-model="countryOptions.country" placeholder="Enter a country" />
                     <datalist id="countryList">
@@ -34,8 +33,8 @@
                 <div class="input-group">
                     <span class="input-group-addon" style="font-weight:bold">City</span>
                     <input ng-disabled="!vm.selectedCountryCodeSet()" type="text" class="form-control" id="txtCity" aria-describedby="inputGrouptxtCityStatus" ng-autocomplete="countryResult" options="countryOptions" details="countryDetails">
-                    <span ng-show="vm.selectedCountryCodeSet()" class="glyphicon glyphicon-ok form-control-feedback" style="color:green" aria-hidden="true"></span>
-                    <span ng-show="!vm.selectedCountryCodeSet()" class="glyphicon glyphicon-remove form-control-feedback" style="color:red" aria-hidden="true"></span>
+                    <span ng-show="vm.countryAndCitySet()" class="glyphicon glyphicon-ok form-control-feedback" style="color:green" aria-hidden="true"></span>
+                    <span ng-show="!vm.countryAndCitySet()" class="glyphicon glyphicon-remove form-control-feedback" style="color:red" aria-hidden="true"></span>
                     <span id="inputGrouptxtCityStatus" class="sr-only">(success)</span>
                 </div>
             </div>
@@ -45,12 +44,12 @@
             <div class="col-md-3 text-right"><label>City</label></div>
             <div class="col-md-9">{{vm.cityForecast.city.name}},{{vm.cityForecast.city.country}}</div>
         </div>
-        <div class="row" ng-show="vm.cityForecast != []">
+        <div class="row" ng-hide="vm.cityForecast == []">
             <div class="col-md-3 text-right"><label>Latitude / Longtitude</label></div>
             <div class="col-md-9">{{vm.cityForecast.city.latitude}}, {{vm.cityForecast.city.longtitude}}</div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-hide="vm.cityForecast == []">
             <div class="col-md-1"></div>
             <div class="col-md-2" ng-repeat="day in vm.cityForecast.days"><!-- each day has a date and timeslices property -->
                 <div class="row">
@@ -83,6 +82,21 @@
                 </div>
             </div><!-- End forecast days repeater -->
             <div class="col-md-1"></div>
+        </div>
+    </div>
+    <div id="mdlMessages" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="mdlTitle">Modal Header</h4>
+                </div>
+                <div class="modal-body" id="mdlBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 

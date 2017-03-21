@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.Tests", "Forecast.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.Helper", "Forecast.Helper\Forecast.Helper.csproj", "{8E1AA265-31A9-4964-B833-1F568823393A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.Manager", "Forecast.Manager\Forecast.Manager.csproj", "{90E79507-1192-4914-94E5-0C6D4F362F4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.Models", "Forecast.Models\Forecast.Models.csproj", "{0FBE30C6-0F23-4F9D-A209-FFB276E2FDF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8E1AA265-31A9-4964-B833-1F568823393A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E1AA265-31A9-4964-B833-1F568823393A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E1AA265-31A9-4964-B833-1F568823393A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E79507-1192-4914-94E5-0C6D4F362F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E79507-1192-4914-94E5-0C6D4F362F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E79507-1192-4914-94E5-0C6D4F362F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E79507-1192-4914-94E5-0C6D4F362F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBE30C6-0F23-4F9D-A209-FFB276E2FDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBE30C6-0F23-4F9D-A209-FFB276E2FDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBE30C6-0F23-4F9D-A209-FFB276E2FDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBE30C6-0F23-4F9D-A209-FFB276E2FDF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

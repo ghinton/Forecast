@@ -1,9 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Forecast.ViewModels
+namespace Forecast.Models.ViewModels
 {
     public class WeatherForecast
     {
+        public WeatherForecast()
+        {
+            ErrorMessages = new List<string>();
+        }
+
+        public List<string> ErrorMessages { get; set; }
         public Location City { get; set; }
         public Dictionary<string, ForecastDay> Days { get; set; }
     }

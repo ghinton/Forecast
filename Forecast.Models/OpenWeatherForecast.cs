@@ -25,8 +25,8 @@ namespace Forecast.Models
         public string Country { get; set; } // country code - e.g. GB
         [JsonProperty("coord")]
         public Coord Coord { get; set; } // longtitude, latitude, altitude
-        //public int population { get; set; }
-        //public Sys sys { get; set; }
+                                         //public int population { get; set; }
+                                         //public Sys sys { get; set; }
     }
 
     public class Coord
@@ -127,5 +127,4 @@ namespace Forecast.Models
         [JsonProperty("dt_txt")]
         public string ForecastDateTime { get; set; }
     }
-
 }

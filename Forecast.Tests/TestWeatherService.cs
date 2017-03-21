@@ -20,8 +20,10 @@ namespace Forecast.Tests
         public void GetWeatherWithNoCity()
         {
             var fc = new Controllers.ForecastController();
-            IHttpActionResult r = fc.GetForecast(string.Empty);
-            //Assert.Throws
+            //var ex = Assert.That(fc.GetForecast(string.Empty) == new );
+
+            // now we can test the exception itself
+            //Assert.That(ex.Message == "City name was not specified");
         }
 
         [Test]

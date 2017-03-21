@@ -38,7 +38,7 @@
         function selectedCountryCodeSet() {
             //console.log(vm.isoCountryList.filter(function (country) { return country.code == vm.selectedCountryCode }));
             var sc = $scope.countryOptions.country;
-            if (sc.length == 2 && vm.isoCountryList.filter(function (country) { return country.code == sc }).length > 0) {
+            if (sc.length === 2 && vm.isoCountryList.filter(function (country) { return country.code === sc; }).length > 0) {
                 //if (vm.selectedCountryCode.length == 2 && vm.isoCountryList.filter(function (country) { return country.code == vm.selectedCountryCode }).length > 0) {
                 return true;
             }
@@ -55,7 +55,13 @@
         }
 
         function onFailure(err) {
-            alert("Failure" + err.data);
+            var result = "Forecast Retrieval failed with the following errors:";
+            angular.forEach(err.data.errorMessages, function (value) {
+                result += "<li>" + value + "</li>";
+            });
+            $('#mdlBody').html(result);
+            $('#mdlTitle').text("Forecast Retrieval Failure");
+            $('#mdlMessages').modal('show');
         }
 
         /*function buildForecastTable() {
