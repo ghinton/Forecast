@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\Bundler.cs" />
+    <Compile Include="Config\ForecastResolver.cs" />
     <Compile Include="Config\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ForecastController.cs" />

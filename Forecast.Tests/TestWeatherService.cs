@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Configuration;
 using System.Text;
-using Newtonsoft.Json.Converters;
 
+using Moq;
 using NUnit.Framework;
 
 using Forecast.Models.ViewModels;
 using Forecast.Controllers;
+using Forecast.Manager;
+using Forecast.Manager.Interfaces;
 
 namespace Forecast.Tests
 {
@@ -14,12 +16,14 @@ namespace Forecast.Tests
     public class TestWeatherService
     {
         ForecastController fc;
+        IForecastManager fm;
 
         [OneTimeSetUp]
         public void Init()
         {
             Console.WriteLine("Setting up Test Fixtures");
-            fc = new ForecastController();
+            fm = new ForecastManager();
+            fc = new ForecastController(fm);
         }
 
         /// <summary>

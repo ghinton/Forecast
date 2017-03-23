@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
     <Compile Include="ForecastManager.cs" />
+    <Compile Include="Interfaces\IForecastManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

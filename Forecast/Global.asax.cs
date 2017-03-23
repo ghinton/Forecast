@@ -9,6 +9,7 @@ namespace Forecast
         {
             Config.Bundler.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(Config.WebApiConfig.Register);
+
         }
     }
 }
