@@ -37,12 +37,15 @@ namespace Forecast.Controllers
             {
                 // Connect to the weather API web service
                 var strResponse = _forecastManager.GetForecastByCityJson(cityName, out errMsg);
-                if(!string.IsNullOrEmpty(errMsg))
+                if (!string.IsNullOrEmpty(errMsg))
                 {
                     wf.ErrorMessages.Add(errMsg);
                 }
+                else
+                {
+                    wf = _forecastManager.GetForecastByCity(strResponse, cityName);
+                }
 
-                wf = _forecastManager.GetForecastByCity(strResponse, cityName);
                 if (Request != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, wf);
