@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
+using Forecast.Data.Interfaces;
 using Forecast.Helper;
 using Forecast.Manager.Interfaces;
 using Forecast.Models;
@@ -15,10 +16,15 @@ namespace Forecast.Manager
 {
     public class ForecastManager : BaseManager, IForecastManager
     {
-        private static readonly string weatherWebServiceEndPointUrl = ConfigurationManager.AppSettings["weatherApiUrl"];
-        private static readonly string weatherWebServiceResourceKey = ConfigurationManager.AppSettings["weatherApiResourceKey"];
+        private readonly IOpenWeather _dataLayer;
         private static readonly string weatherIconPrefixUrl = ConfigurationManager.AppSettings["weatherIconUrlPrefix"];
         private const string CONST_degreesFarenheit = "&#8451;";
+
+        public ForecastManager(IOpenWeather dataLayer)
+        {
+            if(dataLayer == null) { throw new ArgumentNullException("Data Layer not supplied"); }
+            _dataLayer = dataLayer;
+        }
 
         public string GetForecastByCityJson(string cityName, out string errors)
         {
@@ -28,37 +34,8 @@ namespace Forecast.Manager
                 errors = "City name was not specified";
                 return null;
             }
-            var strResponse = string.Empty;
-
             // Connect to the weather API web service
-            /* Params
-             * For temperature in Fahrenheit use units=imperial
-                For temperature in Celsius use units=metric
-                Temperature in Kelvin is used by default, no need to use units parameter in API call
-
-                Imperial will return wind in mph, metric in metres per second
-             */
-            var wr = WebRequest.Create(string.Format("{0}&appid={1}", weatherWebServiceEndPointUrl.Replace("{cityid}", cityName), weatherWebServiceResourceKey));
-            using (var response = wr.GetResponse())
-            {
-                var responseCode = ((HttpWebResponse)response).StatusCode;
-                if (responseCode != HttpStatusCode.OK)
-                {
-                    errors = "Unable to retrieve data from Weather Service at " + weatherWebServiceEndPointUrl;
-                    return null;
-                }
-                using (var dataStream = response.GetResponseStream())
-                {
-                    if (dataStream != null)
-                    {
-                        using (var reader = new StreamReader(dataStream))
-                        {
-                            strResponse = reader.ReadToEnd();
-                        }
-                    }
-                }
-            }
-            return strResponse;
+            return _dataLayer.GetForecastJson(cityName, out errors);
         }
 
         /// <summary>
@@ -164,7 +141,7 @@ namespace Forecast.Manager
                     errMsg = "An unrecoverable system error occurred";
                 }
                 errorCollection.Add(new Tuple<string, Exception>(errMsg, ex));
-                wf.ErrorMessages.Add(errMsg);
+                wf.ErrorMessages.Add(errMsg); // return the user friendly messages to the client
                 // TO DO - ADD INTERNAL LOGGING
             }
             return wf;

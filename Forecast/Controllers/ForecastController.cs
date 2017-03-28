@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Forecast.Data;
+using Forecast.Manager;
 using Forecast.Manager.Interfaces;
 using Forecast.Models.ViewModels;
 
@@ -13,7 +15,10 @@ namespace Forecast.Controllers
     {
         private readonly IForecastManager _forecastManager;
 
-        public ForecastController() : this(new Manager.ForecastManager())
+        /// <summary>
+        /// Default implementation as we haven't introduced Unity
+        /// </summary>
+        public ForecastController() : this(new ForecastManager(new OpenWeather()))
         {
             
         }

@@ -85,6 +85,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Forecast.Data\Forecast.Data.csproj">
+      <Project>{0298e70e-c594-4d8b-8a20-e3992f4ecb00}</Project>
+      <Name>Forecast.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forecast.Helper\Forecast.Helper.csproj">
       <Project>{8e1aa265-31a9-4964-b833-1f568823393a}</Project>
       <Name>Forecast.Helper</Name>
@@ -104,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Examples\OpenWeatherExample.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

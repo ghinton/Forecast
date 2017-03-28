@@ -11,6 +11,8 @@ using NUnit.Framework;
 
 using Forecast.Models.ViewModels;
 using Forecast.Controllers;
+using Forecast.Data;
+using Forecast.Data.Interfaces;
 using Forecast.Manager;
 using Forecast.Manager.Interfaces;
 
@@ -19,15 +21,11 @@ namespace Forecast.Tests
     [TestFixture]
     public class TestWeatherService
     {
-        ForecastController fc;
-        IForecastManager fm;
 
         [OneTimeSetUp]
         public void Init()
         {
             Console.WriteLine("Setting up Test Fixtures");
-            fm = new ForecastManager();
-            fc = new ForecastController(fm);
         }
 
         /// <summary>
@@ -42,23 +40,31 @@ namespace Forecast.Tests
         [Test]
         public void TestForecastManager()
         {
-            string testJson = "testResult";
+            string testOpenWeatherResult = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Examples\\OpenWeatherExample.json").Replace("\r\n","");
             string str = string.Empty;
             var city = "London,GB";
-            var testLocation = new Location()
-            {
-                Country = "GB",
-                Latitude = "1",
-                Longtitude = "2",
-                Name = city
-            };
+
+            // Given a forecast manager and openweather instance
+            // When Calling GetForecastByCity in the manager
+            // Expect the GetForecastByCityJson method to be called in the ForecastManager instance
             var fm2 = new Mock<IForecastManager>();
-            fm2.Setup(mgr => mgr.GetForecastByCity(It.IsAny<string>(), It.IsAny<string>())).Returns(new WeatherForecast() { City = testLocation, ErrorMessages = new List<string>() { "Test Error" }, Days = new Dictionary<string, ForecastDay>() });
-            fm2.Setup(mgr => mgr.GetForecastByCityJson(city, out str)).Returns(testJson);
+            fm2.Setup(mgr => mgr.GetForecastByCity(It.IsAny<string>(), It.IsAny<string>())).Returns(getFakeForecastObject());
+            fm2.Setup(mgr => mgr.GetForecastByCityJson(city, out str)).Returns(testOpenWeatherResult);
+            var strJson = fm2.Object.GetForecastByCityJson(city, out str);
+            fm2.Verify(fmgr => fmgr.GetForecastByCityJson(city, out str), Times.Once(), "GetForecastByCityJson was not called");
+            Assert.AreEqual(strJson, testOpenWeatherResult);
+            Assert.AreEqual(strJson, testOpenWeatherResult, "The expected JSON string was not returned");
 
             // Verify that manager calls return correctly
-            var strJson = fm2.Object.GetForecastByCityJson(city, out str);
-            Assert.AreEqual(strJson, testJson, "The expected JSON string was not returned");
+            var ow = new Mock<IOpenWeather>();
+            ow.Setup(d => d.GetForecastJson(It.IsAny<string>(), out str)).Returns(testOpenWeatherResult);
+
+            // Expect the GetForecastJson method in OpenWeather called
+            // Expect the return value to equal what was returned by the OpenWeather instance
+            var fm = new ForecastManager(ow.Object);
+            var fjson = fm.GetForecastByCityJson(city, out str);
+            ow.Verify(d => d.GetForecastJson(city, out str), Times.Once(), "GetForecastJson method in OpenWeather was not called");
+            Assert.AreEqual(fjson, testOpenWeatherResult);
         }
 
         [Test]
@@ -128,6 +134,7 @@ namespace Forecast.Tests
             // Given that city is not supplied
             // When calling GetForecast
             // Then Expect a response of OK with an empty forecast object and an error collection of 1
+            var fc = new ForecastController(new ForecastManager(new OpenWeather()));
             var r = fc.GetForecast(string.Empty);
             Assert.That(r.StatusCode == HttpStatusCode.OK, "Even when the city is not supplied the API should return an empty object");
 
@@ -141,6 +148,7 @@ namespace Forecast.Tests
         [Test]
         public void GetWeatherWithInvalidCity()
         {
+            var fc = new ForecastController(new ForecastManager(new OpenWeather()));
             var r = fc.GetForecast("InvalidCity,InvalidCountry");
 
             // now we can test the exception itself
@@ -150,6 +158,7 @@ namespace Forecast.Tests
         [Test]
         public void GetWeatherWithValidCity()
         {
+            var fc = new ForecastController(new ForecastManager(new OpenWeather()));
             var r = fc.GetForecast("London,GB");
             Assert.That(r.StatusCode == HttpStatusCode.OK, "Failed to retrieve Forecast for London GB");
         }
@@ -175,8 +184,6 @@ namespace Forecast.Tests
         [OneTimeTearDown]
         public void TearDown()
         {
-            fc = null;
-            fm = null;
             Console.WriteLine("Tests completed");
         }
 

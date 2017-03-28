@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
     angular
         .module("forecast") // preload Google places autocomplete
         .constant("resources", {

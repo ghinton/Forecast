@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
     // OpenWeather API Service call
     angular
