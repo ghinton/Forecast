@@ -31,3 +31,7 @@ e. etc
 f. Move the generated file to the Config folder
 
 7. Generate a shortcut run command file and place it in the root of the UnitTesting folder to start Karma and pass in the name of the config file
+
+Add karma-chrome-launcher and karma-jasmine to plugins
+Set single run to true and concurrency to 1
+Add angular, jquery and bootstrap js files to the files array

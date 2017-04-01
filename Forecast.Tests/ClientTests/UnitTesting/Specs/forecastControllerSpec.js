@@ -2,7 +2,7 @@
 /// <reference path="..\Forecast3\Forecast\app\app.js" />
 xdescribe("When initializing the forecastController", function () {
     //initialize Angular
-    beforeEach(module("forecast"));
+    beforeEach(angular.module("forecast"));
 
     var scope;
     beforeEach(inject(

@@ -18,7 +18,9 @@ module.exports = function(config) {
         // Angular Framework files
         "../../../Forecast/Scripts/jquery-3.1.1.js",
         "../../../Forecast/Scripts/angular.js",
+        "../../../Forecast/Scripts/angular-sanitize.js",
         "../../../Forecast/Scripts/bootstrap.js",
+        "../../Scripts/angular-mocks.js", // use version shipped with Jasmine
 
         // All app js files from the web project
         '../../../Forecast/app/**/*.js',
@@ -40,6 +42,7 @@ module.exports = function(config) {
     plugins:[
         //By default, Karma loads all sibling NPM modules which have a name starting with karma-*. - NOTE THAT IF THEY'RE NOT ALL PREFIXED KARMA THEY WON'T WORK
         "karma-jasmine",
+        "karma-phantomjs-launcher",
         "karma-chrome-launcher"
     ],
 
@@ -54,7 +57,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['dots','progress'],
 
 
     // web server port
@@ -71,12 +74,12 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome'], // 'PhantomJS'
 
 
     // Continuous Integration mode
@@ -85,6 +88,9 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: 1
+    concurrency: 1,
+
+    // Level of logging
+    logLevel: config.LOG_INFO
   })
 }
