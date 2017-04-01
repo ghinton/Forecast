@@ -1,4 +1,4 @@
-﻿/// <reference path="..\angular.js" />
+﻿/*/// <reference path="..\angular.js" />
 /// <reference path="..\Forecast3\Forecast\app\app.js" />
 xdescribe("When initializing the forecastController", function () {
     //initialize Angular
@@ -21,4 +21,4 @@ xdescribe("When initializing the forecastController", function () {
     it("sanity check", function () {
         expect(0).toBe(0);
     });
-});
+});*/

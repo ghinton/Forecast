@@ -4,50 +4,55 @@
     "use strict";
 
     describe("Unit: Testing Open Weather Services", function () {
-        var $httpbackEnd;
-        var weatherService;
+        var httpbackEnd;
+        var _weatherService;
 
         //initialize Angular
-        beforeEach(angular.mock.module("forecast"));
-        beforeEach(angular.mock.inject(function (_$httpbackend, _weatherService) {
-            $httpbackEnd = _$httpbackEnd;
-            weatherService = _weatherService;
-            $httpbackEnd.whenGET("/api/forecast/*").respond(200, { result: true });
-            $httpbackEnd.flush(); // flush the pending request
+        beforeEach(module("forecast"));
+        beforeEach(inject(function ($httpBackend, weatherService) {
+            httpbackEnd = $httpBackend;
+            _weatherService = weatherService;
+            //httpbackEnd.whenGET("/api/forecast/*").respond(200, { result: true });
         }));
 
         afterEach(function () {
-            $httpbackEnd.verifyNoOutstandingRequest();
-            $httpbackEnd.verifyNoOutstandingExpectation();
+            httpbackEnd.verifyNoOutstandingRequest();
+            httpbackEnd.verifyNoOutstandingExpectation();
         });
 
+        // Check weatherService service is returned by the forecast module
         it("forecast module should contain a weatherService Service", function () {
-            angular.mock.inject(function (weatherService) {
-                expect(weatherService).not.toEqual(null);
-            })
+            expect(_weatherService).not.toEqual(null);
+            console.info("forecast module should contain a weatherService Service - SUCCESS");
         });
 
-        describe("ForecastByCity Service", function () {
-            var svc = null;
+        it("forecastByCity method should call http and return an http OK result code", function () {
+            httpbackEnd.expect("GET", "api/forecast/London,GB").respond(200, { data: "passed" }); // when the API is called with London,GB return expected result data
+            // Now verify that the weather service returns the expected result when the method for the service is called
+            _weatherService.getWeatherByCity("London,GB").then(function (result) {
+                expect(result.status).toEqual(200);
+                expect(result.data).toEqual({ data: "passed" });
+                console.info("forecastByCity method should exist and return an HTTP 200 - SUCCESS");
+            });
+            httpbackEnd.flush(); // force any pending requests to be executed
+        });
 
+        /*describe("ForecastByCity Service", function () {
             var scope;
-            beforeEach(angular.mock.inject(
+
+            // Instantiate the controller prior to each request
+            beforeEach(inject(
                 function ($controller, $rootScope) {
                     scope = $rootScope.$new();
                     var ctrl = $controller("forecastCtrl", { $scope: scope });
                 }
             ));
 
-            it("Initial Value is 5",
-                function () {
-                    expect(scope.value).toBe(5);
-                }
-            );
 
             it("sanity check", function () {
                 expect(0).toBe(0);
             });
-        });
+        });*/
     });
 
 
