@@ -108,8 +108,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClientTests\UnitTesting\package.json" />
+    <None Include="ClientTests\UnitTesting\RunTests.bat" />
     <None Include="Examples\OpenWeatherExample.json" />
     <None Include="packages.config" />
+    <None Include="Scripts\angular.min.js.map" />
+    <None Include="Views\Jasmine\SpecRunner.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientTests\UnitTesting\Config\karma.conf.js" />
+    <Content Include="ClientTests\UnitTesting\Specs\forecastControllerSpec.js" />
+    <Content Include="ClientTests\UnitTesting\Specs\openWeatherServiceSpec.js" />
+    <Content Include="ClientTests\UnitTesting\readme.txt" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\jasmine-samples\Player.js" />
+    <Content Include="Scripts\jasmine-samples\PlayerSpec.js" />
+    <Content Include="Scripts\jasmine-samples\Song.js" />
+    <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientTests\UnitTesting\TestData\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
