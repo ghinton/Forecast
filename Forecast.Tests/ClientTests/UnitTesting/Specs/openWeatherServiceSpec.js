@@ -12,7 +12,6 @@
         beforeEach(inject(function ($httpBackend, weatherService) {
             httpbackEnd = $httpBackend;
             _weatherService = weatherService;
-            //httpbackEnd.whenGET("/api/forecast/*").respond(200, { result: true });
         }));
 
         afterEach(function () {
@@ -26,7 +25,7 @@
             console.info("forecast module should contain a weatherService Service - SUCCESS");
         });
 
-        it("forecastByCity method should call http and return an http OK result code", function () {
+        it("forecastByCity method should call a known URL", function () {
             httpbackEnd.expect("GET", "api/forecast/London,GB").respond(200, { data: "passed" }); // when the API is called with London,GB return expected result data
             // Now verify that the weather service returns the expected result when the method for the service is called
             _weatherService.getWeatherByCity("London,GB").then(function (result) {
@@ -36,54 +35,11 @@
             });
             httpbackEnd.flush(); // force any pending requests to be executed
         });
-
-        /*describe("ForecastByCity Service", function () {
-            var scope;
-
-            // Instantiate the controller prior to each request
-            beforeEach(inject(
-                function ($controller, $rootScope) {
-                    scope = $rootScope.$new();
-                    var ctrl = $controller("forecastCtrl", { $scope: scope });
-                }
-            ));
-
-
-            it("sanity check", function () {
-                expect(0).toBe(0);
-            });
-        });*/
     });
-
-
-
-    /*(function () {
-        "use strict";
-
-        // OpenWeather API Service call
-        angular
-            .module("forecast") // get the module (not redefine it)
-            .factory("weatherService", ["$http", weatherService]);
-
-        function weatherService($http) {
-            // Return the methods we want to expose
-            return {
-                // begin factory code
-                getWeatherByCity: function (cityName) {
-                    var url = "api/forecast/" + cityName;
-                    return $http({
-                        method: "GET",
-                        url: url,
-                        data: cityName
-                    });
-                }
-            };
-        }
-    })();*/
 
     // describe = suite declaration
     // it = spec
     // expect = expectations, these are chained with matchers and can also be chained with .not. if the negative is desired
     // toBe (bool), toEqual (value), toMatch (regex), toBeDefined, toBeNull, toContain (str / array)
-        // full list of matchers here https://jasmine.github.io/2.0/custom_matcher.html
+    // full list of matchers here https://jasmine.github.io/2.0/custom_matcher.html
 })();

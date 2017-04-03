@@ -12,6 +12,24 @@ xdescribe("When initializing the forecastController", function () {
         }
     ));
 
+        /*describe("ForecastByCity Service", function () {
+            var scope;
+
+            // Instantiate the controller prior to each request
+            beforeEach(inject(
+                function ($controller, $rootScope) {
+                    scope = $rootScope.$new();
+                    var ctrl = $controller("forecastCtrl", { $scope: scope });
+                }
+            ));
+
+
+            it("sanity check", function () {
+                expect(0).toBe(0);
+            });
+        });*/
+
+
     it("Initial Value is 5",
         function () {
             expect(scope.value).toBe(5);
