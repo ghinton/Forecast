@@ -1,4 +1,4 @@
-beforeEach(function () {
+/*beforeEach(function () {
   jasmine.addMatchers({
     toBePlaying: function () {
       return {
@@ -13,3 +13,4 @@ beforeEach(function () {
     }
   });
 });
+*/

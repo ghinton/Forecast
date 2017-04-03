@@ -35,3 +35,4 @@ f. Move the generated file to the Config folder
 Add karma-chrome-launcher and karma-jasmine to plugins
 Set single run to true and concurrency to 1
 Add angular, jquery and bootstrap js files to the files array
+Add jasmine and angular-mocks to the spec files to permit usage of inject and module

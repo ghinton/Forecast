@@ -13,6 +13,7 @@
         vm.selectedCountryCodeSet = selectedCountryCodeSet;
         vm.getForecast = getForecast;
         vm.forecastFetched = false;
+        vm.cityForecast = [];
 
         // Google Autocomplete
         $scope.countryResult = "";
@@ -21,9 +22,6 @@
             types: "(cities)"
         };
         $scope.countryDetails = ""; // returns the geocode place
-
-
-        vm.cityForecast = [];
 
         function getForecast() {
             var selectedCountry = $scope.countryOptions.country.trim();

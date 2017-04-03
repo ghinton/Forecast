@@ -23,13 +23,13 @@ module.exports = function(config) {
         "../../Scripts/angular-mocks.js", // use version shipped with Jasmine
 
         // All app js files from the web project
-        '../../../Forecast/app/**/*.js',
+        "../../../Forecast/app/**/*.js",
 
         // Test Data files
         //'TestData/**/*.js',
 
         // Unit Test files
-        'Specs/**/*.js'
+        "Specs/**/*.js"
 
     ],
 
